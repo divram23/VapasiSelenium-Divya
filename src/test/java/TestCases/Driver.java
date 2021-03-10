@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,15 +29,6 @@ public class Driver {
     public CheckoutPage checkoutPage;
 
 
-
- /*   public Driver() {
-       this.driver = driver;
-    }*/
-
- /*   public Driver(WebDriver driver) {
-        this.driver = driver;
-    }*/
-
     public void waitForElement(WebElement locatorName){
         WebDriverWait wait = new WebDriverWait(driver, 40);
         wait.until(ExpectedConditions.visibilityOfElementLocated((By) locatorName));
@@ -48,7 +40,7 @@ public class Driver {
         System.setProperty("webdriver.chrome.driver", "/Users/divyaramamurthy/IdeaProjects/VapasiSelenium-Divya/src/test/java/drivers/chromedriver");
         driver = new ChromeDriver();
         driver.get("https://spree-vapasi.herokuapp.com/");
-         homePage = new HomePage(driver);
+        homePage = new HomePage(driver);
          loginPage = new LoginPage(driver);
          productPage = new ProductPage(driver);
          checkoutPage = new CheckoutPage(driver);
@@ -71,28 +63,7 @@ public class Driver {
     @AfterMethod
 
     public void afterTest(){
-           // (ITestResult result){
-       /* if(ITestResult.FAILURE==result.getStatus())
-        {
-            try
-            {
-                TakesScreenshot ts=(TakesScreenshot)driver;
-                File source=ts.getScreenshotAs(OutputType.FILE);
-                String timeStamp = new SimpleDateFormat("yyyy_MM_dd__hh_mm_ss").format(new Date());
-                try{
-                    FileHandler.copy(source, new File("./Screenshots/"+result.getName()+" "+timeStamp+".png"));
-                    System.out.println("Screenshot taken");
-                }catch (Exception e){
-                    System.out.println("Exception while renaming file: "+e.getMessage());
-                }
-            }
-            catch (Exception e)
-            {
-                System.out.println("Exception while taking screenshot "+e.getMessage());
-            }
-        }*/
         homePage.clickLogoutButton();
-        //driver.close();
     }
 
     @AfterClass
@@ -100,7 +71,4 @@ public class Driver {
         //driver.close();
         driver.quit();
     }
-
-
-
 }

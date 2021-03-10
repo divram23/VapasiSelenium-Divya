@@ -14,13 +14,10 @@ import org.testng.annotations.Test;
 public class TestSet1 extends Driver{
 
     public void loginAccount() throws InterruptedException {
-        //homePage.open();
-        //homePage.wait(4000);
         homePage.clickLoginButton();
         loginPage.enterUserEmail("Divya@gmail.com");
         loginPage.enterPassword("123456");
         loginPage.clickLoginButton();
-        //Thread.sleep(3000);
     }
 
     @DataProvider(name = "SearchPhrases")

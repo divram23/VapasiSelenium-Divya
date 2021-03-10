@@ -15,22 +15,18 @@ public class HomePage extends Driver {
     public String price = "";
 
     public HomePage(WebDriver driver) {
-        //super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }
 
-    //WebElement loginButton = driver.findElement(By.xpath("//a[normalize-space()='Login']"));
-
     @FindBy(xpath = "//a[normalize-space()='Login']")
     WebElement loginButton;
 
-    //@FindBy(xpath = "//div[contains(@class, 'alert']")
+
     @FindBy(className = "alert")
     WebElement alertMessage;
 
-    //div[@class='alert alert-notice']
 
 
     @FindBy(xpath = "//a[normalize-space()='Logout']")
@@ -94,36 +90,6 @@ public class HomePage extends Driver {
         }
         return flag;
     }
-
-       /* for(WebElement results: searchResults){
-            //System.out.println(results.getText());
-            str1 =
-            if(str1.contains(substring))
-                flag = true;
-            //if(results.getText().contains("Ruby"))
-              //  flag = true;
-            else
-                flag = false;
-        }
-        return  flag;
-     Boolean f1 = null;
-        for (int i = 0; i < searchResults.size(); i++) {
-            if (searchResults.get(i).getText().contains(substring)) {
-                flag = true;
-            }
-            //flag = searchResults.get(i).getText().contains(substring);
-            //System.out.println(flag);
-
-            //System.out.println(searchResults.get(i).getText());
-            //f1 = true;
-            // System.out.println(f1);
-            else {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }*/
 
     public void selectCategory(String categoryName) {
         WebElement categorySelected = null;

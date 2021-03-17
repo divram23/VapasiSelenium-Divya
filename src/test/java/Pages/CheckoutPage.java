@@ -1,27 +1,25 @@
 package Pages;
 
-import TestCases.Driver;
+import TestCases.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CheckoutPage extends Driver {
+public class CheckoutPage extends BasePage {
 
 
     public CheckoutPage(WebDriver driver) {
-        //super(driver);
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
-
     @FindBy(xpath = "//td[@class='lead text-primary cart-item-price']")
     WebElement price;
 
-    @FindBy(xpath = "//input[@id='order_line_items_attributes_0_quantity']")
+    @FindBy(name = "order[line_items_attributes][0][quantity]")
     WebElement quantity;
 
-    @FindBy(xpath = " //td[@class='lead']")
+    @FindBy(xpath = "//td[@class='cart-item-quantity']/following-sibling::td")
     WebElement total;
 
     @FindBy(xpath = "//input[@name='commit']")
@@ -34,8 +32,9 @@ public class CheckoutPage extends Driver {
         Boolean f1 = false;
         String priceString = price.getText().replace("$", "");
         Double priceValue = Double.parseDouble(priceString);
-        String quantityString = quantity.getText();
-        Double quantityValue = Double.parseDouble(quantityString);
+        String quantityString = quantity.getAttribute("value");
+        System.out.println(quantityString);
+        Integer quantityValue = Integer.parseInt(quantityString);
         Double totalValue = priceValue * quantityValue;
         String totalString = Double.toString(totalValue);
         String totalStringValue = "$" + totalString;

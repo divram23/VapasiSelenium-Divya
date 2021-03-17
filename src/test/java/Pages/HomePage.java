@@ -1,21 +1,20 @@
 package Pages;
 
-import TestCases.Driver;
+import TestCases.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage extends Driver {
+public class HomePage extends BasePage {
     public String price = "";
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
 
     }
@@ -55,9 +54,18 @@ public class HomePage extends Driver {
     @FindBys(@FindBy(xpath = "//div[@id='products']/child::div"))
     List<WebElement> searchResults;
 
-    public void open() {
-        driver.navigate().to("https://spree-vapasi.herokuapp.com/");
-    }
+    @FindBy(id = "link-to-cart")
+    WebElement cartButtonHomePage;
+
+    @FindBy(className = ".alert.alert-info")
+    WebElement cartInfoMessage;
+
+    @FindBy(className = "btn btn-default")
+    WebElement continueShoppingButton;
+
+    @FindBy(id = "btn btn-default")
+    WebElement emptyCartButton;
+
 
 
     public void clickLoginButton() {
@@ -74,6 +82,21 @@ public class HomePage extends Driver {
     }
 
     public void enterSearchCriteria(String text1) {
+        searchCriteria.sendKeys(text1);
+        searchButton.click();
+    }
+
+    public void enterSearchProductName(String text1) {
+        /*cartButtonHomePage.click();
+        if(cartInfoMessage.getText() == "Your cart is empty")
+        {
+            continueShoppingButton.click();
+        }
+        else
+        {
+            emptyCartButton.click();
+            continueShoppingButton.click();
+        }*/
         searchCriteria.sendKeys(text1);
         searchButton.click();
     }
@@ -152,20 +175,20 @@ public class HomePage extends Driver {
     }
 
     public void selectProduct(String text3) {
-        //driver.findElement(By.className("two-col")).click();
+        driver.findElement(By.className("two-col")).click();
 
-        for(int n=1; n < pages.size(); n++){
+        //for(int n=1; n < pages.size(); n++){
             //pages.get(n).getText();
 
             for (int m = 0; m < searchResults.size(); m++) {
                 if (searchResults.get(m).getText().contains(text3)) {
                     searchResults.get(m).click();
                 }
-                pages.get(n).click();
+                //pages.get(n).click();
             }
         }
     }
-}
+
 
 
 

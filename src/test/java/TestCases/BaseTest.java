@@ -1,9 +1,7 @@
 package TestCases;
 
-import Pages.CheckoutPage;
-import Pages.HomePage;
-import Pages.LoginPage;
-import Pages.ProductPage;
+import Pages.*;
+import org.jsoup.Connection;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Listeners(Utils.ListenerTest.class)
 
-public class Driver {
+public class BaseTest {
     public static WebDriver driver;
     public WebDriverWait wait;
     public HomePage homePage;
@@ -32,6 +30,7 @@ public class Driver {
         System.setProperty("webdriver.chrome.driver", "/Users/divyaramamurthy/IdeaProjects/VapasiSelenium-Divya/src/test/java/drivers/chromedriver");
         driver = new ChromeDriver();
         driver.get("https://spree-vapasi.herokuapp.com/");
+        BasePage basePage = new BasePage(driver);
         homePage = new HomePage(driver);
          loginPage = new LoginPage(driver);
          productPage = new ProductPage(driver);

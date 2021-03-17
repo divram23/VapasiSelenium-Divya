@@ -6,16 +6,8 @@ import Pages.LoginPage;
 import Pages.ProductPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.io.FileHandler;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(Utils.ListenerTest.class)
@@ -29,11 +21,11 @@ public class Driver {
     public CheckoutPage checkoutPage;
 
 
-    public void waitForElement(WebElement locatorName){
+    /*public void waitForElement(WebElement locatorName){
         WebDriverWait wait = new WebDriverWait(driver, 40);
         wait.until(ExpectedConditions.visibilityOfElementLocated((By) locatorName));
 
-    }
+    }*/
 
     @BeforeClass
     public void setup(){
@@ -68,7 +60,6 @@ public class Driver {
 
     @AfterClass
     public void closeTest(){
-        //driver.close();
         driver.quit();
     }
 }

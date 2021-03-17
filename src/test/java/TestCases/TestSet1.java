@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class TestSet1 extends Driver{
 
-    public void loginAccount() throws InterruptedException {
+    public void loginAccount(){
         homePage.clickLoginButton();
         loginPage.enterUserEmail("Divya@gmail.com");
         loginPage.enterPassword("123456");
@@ -30,7 +30,6 @@ public class TestSet1 extends Driver{
         homePage.clickLoginButton();
         loginPage.enterUsernameAndPassword("Divya@gmail.com", "123456");
         loginPage.clickLoginButton();
-        //Thread.sleep(3000);
         String actual1 = homePage.verifyMessage();
         Assert.assertEquals(actual1, "Logged in successfully");
 
@@ -62,30 +61,31 @@ public class TestSet1 extends Driver{
         homePage.selectCategory("Bags");
         homePage.selectPriceList("$15.00 - $18.00");
         homePage.clickSearchButton();
-        //homePage.verifyProductsPriceMatchesSelectedPrice();
+
         Boolean actual3 = homePage.verifyProductsPriceMatchesSelectedPrice();
         Boolean expected3 = true;
         Assert.assertEquals(actual3, expected3);
     }
 
-  /* @Test(priority = 3)
+  @Test(priority = 3)
     public void verifyAddCart() throws InterruptedException {
         loginAccount();
         homePage.enterSearchCriteria("Ruby on Rails Mug");
-        //Boolean actual4 =homePage.verifyAllSearchResultsContainsText("Ruby");
-        //System.out.println(actual4);
-       homePage.selectProduct("Ruby on Rails Mug");
-       //Thread.sleep(3000);
-       //productPage.open();
-       productPage.addProductToCart();
+        homePage.selectProduct("Ruby on Rails Mug");
+        productPage.addProductToCart();
+        checkoutPage.makeCartEmpty();
+        homePage.enterSearchCriteria("Ruby on Rails Mug");
+        homePage.selectProduct("Ruby on Rails Mug");
+        productPage.addProductToCart();
        Boolean actual4 = checkoutPage.verifyTotal();
        Boolean expected4 = true;
        Assert.assertEquals(actual4, expected4);
 
     }
 
-    /*@Test(priority = 4, dependsOnMethods = { "verifyLogin" })
-    public void verifyClearCart(){
 
-    }*/
+
+
+
+    }
 }

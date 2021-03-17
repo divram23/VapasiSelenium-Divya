@@ -20,14 +20,12 @@ import java.util.Date;
 import static org.testng.Reporter.log;
 
 public class ListenerTest extends Driver implements ITestListener{
-    private IExtentTestClass ExtentTestManager;
+
     Screenshots screenshots = new Screenshots();
-    ExtentReports reporter;
-    ExtentTest extentTest;
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.println(result.getName()+" test case started:");
+        System.out.println(result.getName()+": TestCase execution started");
 
     }
 
@@ -44,7 +42,7 @@ public class ListenerTest extends Driver implements ITestListener{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Reporter.log("<br></br>");
+
     }
 
     @Override
@@ -56,11 +54,13 @@ public class ListenerTest extends Driver implements ITestListener{
 
     @Override
     public void onStart(ITestContext context) {
+        System.out.println("TEST EXECUTION STARTED");
 
     }
 
     @Override
     public void onFinish(ITestContext context) {
+        System.out.println("TESTING FINISHED");
 
     }
 }

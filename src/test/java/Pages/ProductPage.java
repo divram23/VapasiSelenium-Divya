@@ -12,7 +12,6 @@ public class ProductPage extends Driver {
 
 
     public ProductPage(WebDriver driver){
-        //super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -20,17 +19,12 @@ public class ProductPage extends Driver {
 
     @FindBy(xpath = "//button[normalize-space()='Add To Cart']")
     WebElement addToCartButton;
-    //button[normalize-space()='Add To Cart']
+
 
 
     public void addProductToCart() throws InterruptedException {
-        //waitForElement(addToCartButton);
-        //productPage.wait(4000);
-        wait.until(ExpectedConditions.presenceOfElementLocated((By) addToCartButton)).click();
-        //addToCartButton.click();
+        addToCartButton.click();
     }
 
-    public void open() {
 
-    }
 }

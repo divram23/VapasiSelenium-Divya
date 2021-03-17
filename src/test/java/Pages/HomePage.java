@@ -28,7 +28,6 @@ public class HomePage extends Driver {
     WebElement alertMessage;
 
 
-
     @FindBy(xpath = "//a[normalize-space()='Logout']")
     WebElement logoutButton;
 
@@ -44,6 +43,11 @@ public class HomePage extends Driver {
     @FindBys(@FindBy(xpath = "//h4[normalize-space()='Price Range']/following-sibling::ul/child::li"))
     List<WebElement> allPrices;
 
+    @FindBys(@FindBy(xpath ="//div[@id='products']/following-sibling::ul/child::li"))
+    List<WebElement> pages;
+
+    //ul[@class='pagination']/child::li
+
 
     @FindBy(xpath = "//input[@class='btn btn-primary']")
     WebElement filterSearchButton;
@@ -51,13 +55,12 @@ public class HomePage extends Driver {
     @FindBys(@FindBy(xpath = "//div[@id='products']/child::div"))
     List<WebElement> searchResults;
 
-    public void open(){
+    public void open() {
         driver.navigate().to("https://spree-vapasi.herokuapp.com/");
     }
 
 
     public void clickLoginButton() {
-        //waitForElement(loginButton);
         loginButton.click();
     }
 
@@ -66,7 +69,6 @@ public class HomePage extends Driver {
     }
 
     public String verifyMessage() throws InterruptedException {
-       // waitForElement(alertMessage);
         String messageText = alertMessage.getText();
         return messageText;
     }
@@ -82,7 +84,7 @@ public class HomePage extends Driver {
             //System.out.println(searchResults.get(m).getText());
             if (searchResults.get(m).getText().contains(text2)) {
                 flag = true;
-           //     System.out.println(searchResults.get(m).getText());
+                //     System.out.println(searchResults.get(m).getText());
             } else {
                 flag = false;
                 break;
@@ -93,12 +95,10 @@ public class HomePage extends Driver {
 
     public void selectCategory(String categoryName) {
         WebElement categorySelected = null;
-        //for(WebElement category: allCategories)
         for (int i = 0; i < allCategories.size(); i++) {
             if (allCategories.get(i).getText().contains(categoryName)) {
-                //categorySelected = category;
                 allCategories.get(i).click();
-                //categorySelected.click();
+
             }
         }
     }
@@ -142,30 +142,30 @@ public class HomePage extends Driver {
             priceValue = Double.parseDouble(priceValueStringNew);
             if (priceValue >= min && priceValue <= max) {
                 flag1 = true;
-         //       System.out.println(priceValue);
+                //       System.out.println(priceValue);
             } else {
                 flag1 = false;
                 break;
             }
-          }
-            return flag1;
         }
+        return flag1;
+    }
 
     public void selectProduct(String text3) {
-        //for(int n = 0; n < searchResults.size(); n++){
-            //if(searchResults.get(n).getText().equalsIgnoreCase(text3)){
-                WebElement productElement = driver.findElement(By.linkText("Ruby on Rails Mug"));
-        System.out.println(productElement.getText());
-                //System.out.println(searchResults.get(n).getText());
-               //searchResults.get(n).click();
-        productElement.click();
+        //driver.findElement(By.className("two-col")).click();
+
+        for(int n=1; n < pages.size(); n++){
+            //pages.get(n).getText();
+
+            for (int m = 0; m < searchResults.size(); m++) {
+                if (searchResults.get(m).getText().contains(text3)) {
+                    searchResults.get(m).click();
+                }
+                pages.get(n).click();
             }
         }
-
-
-
-
-
+    }
+}
 
 
 

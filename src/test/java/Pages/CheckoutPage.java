@@ -24,6 +24,12 @@ public class CheckoutPage extends Driver {
     @FindBy(xpath = " //td[@class='lead']")
     WebElement total;
 
+    @FindBy(xpath = "//input[@name='commit']")
+    WebElement emptyCartButton;
+
+    @FindBy(xpath = "//a[normalize-space()='Continue shopping']")
+    WebElement continueShoppingButton;
+
     public Boolean verifyTotal() {
         Boolean f1 = false;
         String priceString = price.getText().replace("$", "");
@@ -38,6 +44,11 @@ public class CheckoutPage extends Driver {
         } else
             f1 = false;
         return f1;
+    }
+
+    public void makeCartEmpty(){
+        emptyCartButton.click();
+        continueShoppingButton.click();
     }
 
 }
